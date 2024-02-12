@@ -16,6 +16,25 @@ class Task extends StatefulWidget {
 
 class _TaskState extends State<Task> {
   int nivel = 0;
+  int maestria = 0;
+
+  Map<int, Color> coresMaestria = {
+    0: Colors.blue,
+    1: Colors.green,
+    2: Colors.yellow,
+    3: Colors.orange,
+    4: Colors.red,
+    5: Colors.purpleAccent,
+    6: Colors.black,
+  };
+
+  Color corLevel() {
+    if (nivel >= widget.dificuldade * 10 && maestria < 6) {
+      maestria++;
+      nivel = 0;
+    }
+    return coresMaestria[maestria] ?? Colors.blue; // Retorna a cor correspondente ou a cor padrão
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +45,7 @@ class _TaskState extends State<Task> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              color: Colors.blue,
+              color: corLevel(),
             ),
             height: 140,
           ),
